@@ -1,0 +1,12 @@
+[submodule "themes/beautifulhugo"]
+	path = themes/beautifulhugo
+	url = https://github.com/halogenica/beautifulhugo.git
+[submodule "edisongustavo.github.io"]
+	path = edisongustavo.github.io
+	url = git@github.com:edisongustavo/edisongustavo.github.io.git
+[submodule "hugo/public"]
+	path = hugo/public
+	url = git@github.com:edisongustavo/edisongustavo.github.io.git
+[submodule "hugo/themes/beautifulhugo"]
+	path = hugo/themes/beautifulhugo
+	url = https://github.com/halogenica/beautifulhugo.git
