@@ -1,5 +1,11 @@
-%.ipynb:
-	nb2hugo --site-dir hugo --section posts $@
+POSTS_DIR=hugo/content/posts
+IPYNB_FILES=$(wildcard notebooks/*.ipynb)
+MARKDOWN_FILES_TO_BUILD=$(patsubst notebooks/%.ipynb, $(POSTS_DIR)/%.md, $(IPYNB_FILES))
+
+# Rule to build markdown files from jupyter notebooks
+$(POSTS_DIR)/%.md: notebooks/%.ipynb
+	@echo Building '$<' in $@
+	nb2hugo --site-dir hugo --section posts $<
 
 .PHONY: bootstrap
 bootstrap:
@@ -7,11 +13,11 @@ bootstrap:
 	brew install hugo
 	pipx install nb2hugo
 
-build-notebooks: notebooks/*.ipynb
+build-notebooks: $(MARKDOWN_FILES_TO_BUILD)
 
-.PHONY: build
+.PHONY: build-notebooks
 build: build-notebooks
-	@echo "Building"
+	@echo "Building the final website."
 	hugo --source hugo
 
 .PHONY: serve
@@ -20,11 +26,9 @@ serve: build-notebooks
 
 .PHONY: publish
 publish: build
-	cd hugo/public
-	git add .
-	git commit -m "Update site"
-	git push
+	$(shell cd hugo/public && git add -A . && git commit -m "Update site" && git push)
+	git add hugo/public
 
 .DEFAULT_GOAL := default
-default: serve
-	@echo "Use 'make publish' to publish the contents"
+default: build
+	@echo "Use:\n- 'make serve' to view the contents\n- 'make publish' to publish the contents"
