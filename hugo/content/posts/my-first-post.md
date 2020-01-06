@@ -1,7 +1,7 @@
 ---
 title: "Hello blog"
 date: 2020-01-06T11:05:29+01:00
-draft: true
+draft: false
 ---
 
 Hello all,
