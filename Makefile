@@ -22,9 +22,9 @@ serve: build-notebooks
 publish: build
 	cd hugo/public
 	git add .
-	git commit
+	git commit -m "Update site"
 	git push
 
 .DEFAULT_GOAL := default
-default: build
-	@echo "Default"
+default: serve
+	@echo "Use 'make publish' to publish the contents"
