@@ -1,3 +1,5 @@
+SHELL :=/bin/bash
+
 POSTS_DIR=hugo/content/posts
 IPYNB_FILES=$(wildcard notebooks/*.ipynb)
 MARKDOWN_FILES_TO_BUILD=$(patsubst notebooks/%.ipynb, $(POSTS_DIR)/%.md, $(IPYNB_FILES))
@@ -26,8 +28,10 @@ serve: build-notebooks
 
 .PHONY: publish
 publish: build
-	$(shell cd hugo/public && git add -A . && git commit -m "Update site" && git push)
-	git add hugo/public
+	$(shell git --git-dir=hugo/public/.git add -A)
+	$(shell git --git-dir=hugo/public/.git diff-index --quiet HEAD || git --git-dir=hugo/public/.git commit -m "Update site")
+	$(shell git --git-dir=hugo/public/.git push)
+	$(shell git add hugo/public)
 
 .DEFAULT_GOAL := default
 default: build
