@@ -31,7 +31,6 @@ publish: build
 	$(shell git --git-dir=hugo/public/.git add -A)
 	$(shell git --git-dir=hugo/public/.git diff-index --quiet HEAD || git --git-dir=hugo/public/.git commit -m "Update site")
 	$(shell git --git-dir=hugo/public/.git push)
-	$(shell git add hugo/public)
 
 .DEFAULT_GOAL := default
 default: build
