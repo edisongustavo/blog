@@ -35,4 +35,6 @@ publish: build
 
 .DEFAULT_GOAL := default
 default: build
-	@echo "Use:\n- 'make serve' to view the contents\n- 'make publish' to publish the contents"
+	@echo "Use:"
+	@echo "- 'make serve' to view the contents"
+	@echo "- 'make publish' to publish the contents"
