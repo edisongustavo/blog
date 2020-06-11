@@ -3,11 +3,12 @@ SHELL :=/bin/bash
 POSTS_DIR=hugo/content/posts
 IPYNB_FILES=$(wildcard notebooks/*.ipynb)
 MARKDOWN_FILES_TO_BUILD=$(patsubst notebooks/%.ipynb, $(POSTS_DIR)/%.md, $(IPYNB_FILES))
+RUN=poetry run
 
 # Rule to build markdown files from jupyter notebooks
 $(POSTS_DIR)/%.md: notebooks/%.ipynb
 	@echo Building '$<' in $@
-	nb2hugo --site-dir hugo --section posts $<
+	$(RUN) nb2hugo --site-dir hugo --section posts $<
 
 .PHONY: bootstrap
 bootstrap:
