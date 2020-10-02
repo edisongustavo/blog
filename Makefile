@@ -14,7 +14,6 @@ $(POSTS_DIR)/%.md: notebooks/%.ipynb
 bootstrap:
 	$(shell curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)
 	brew install hugo
-	pipx install nb2hugo
 
 build-notebooks: $(MARKDOWN_FILES_TO_BUILD)
 
